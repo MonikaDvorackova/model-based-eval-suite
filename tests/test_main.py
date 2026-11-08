@@ -29,6 +29,7 @@ class ModelBasedEvaluationTests(unittest.TestCase):
         self.assertTrue(payload["model_version_id"])
         self.assertTrue(payload["dataset_id"])
         self.assertTrue(payload["ai_system_id"])
+        self.assertFalse(payload["passed"])  # the explicit demo threshold exercises INVALID
         self.assertEqual(event["ts_utc"], "2026-01-01T00:00:00Z")
 
     def test_unknown_policy_and_empty_seed_set_fail(self):
