@@ -34,7 +34,7 @@ curl -fsS -H "Authorization: Bearer $GOVAI_API_KEY" \
   "$GOVAI_AUDIT_BASE_URL/verify/wm-demo-001"
 ```
 
-With only an `evaluation_reported` event, the run is expected to remain `BLOCKED`: a complete lifecycle needs additional dataset, training, risk-review, approval, and promotion evidence. The summary and export come from the ledger-backed runtime; the local report does not make a governance decision. Use a fresh run ID when repeating against the same ledger.
+With the default five seeds and threshold `0.25`, the aggregate transition error is above threshold, so the event records `passed: false` and AIGov Core should return `INVALID` with an evaluation-failure reason. The smoke then exports that decision and verifies the ledger chain. This is an intentional negative-gate example, not a claim that `0.25` is a suitable production threshold. Choose a threshold before evaluating and do not tune it after seeing results. If an evaluation passes, one event still leaves the run `BLOCKED` until the other lifecycle evidence is supplied. The summary and export come from the ledger-backed runtime; the local report does not make a governance decision. Use a fresh run ID when repeating against the same ledger.
 
 ## Scope and limitations
 
